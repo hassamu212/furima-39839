@@ -9,8 +9,8 @@
 | nickname           | string | null: false              |
 | family_name        | string | null: false              |
 | first_name         | string | null: false              |
-| family_name(kana)  | string | null: false              |
-| first_name(kana)   | string | null: false              |
+| family_name_kana   | string | null: false              |
+| first_name_kana    | string | null: false              |
 | birthday           | date   | null: false              |
 
 ### users テーブル Association
@@ -28,7 +28,7 @@
 | status_id           | integer    | null: false                       |
 | delivery_charge_id  | integer    | null: false                       |
 | prefecture_id       | integer    | null: false                       |
-| delivery_days_id    | integer    | null: false                       |
+| delivery_day_id     | integer    | null: false                       |
 | price               | integer    | null: false                       |
 | user                | references | null: false, foreign_key: true    |
 
