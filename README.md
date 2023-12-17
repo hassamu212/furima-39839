@@ -24,11 +24,11 @@
 | ------------------- | ---------- | --------------------------------- |
 | item_title          | string     | null: false                       |
 | item_concept        | text       | null: false                       |
-| category            | genre_id   | null: false                       |
-| status              | genre_id   | null: false                       |
-| delivery_charge     | genre_id   | null: false                       |
-| prefectures         | genre_id   | null: false                       |
-| delivery_days       | genre_id   | null: false                       |
+| category_id         | integer    | null: false                       |
+| status_id           | integer    | null: false                       |
+| delivery_charge_id  | integer    | null: false                       |
+| prefectures_id      | integer    | null: false                       |
+| delivery_days       | integer    | null: false                       |
 | price               | integer    | null: false                       |
 | user                | references | null: false, foreign_key: true    |
 
@@ -55,8 +55,8 @@
 | Column              | Type       | Options                           |
 | ------------------- | ---------- | --------------------------------- |
 | address             | string     | null: false                       |
-| prefectures         | genre_id   | null: false                       |
-| municipalities      | string     | null: false                       |
+| prefectures_id      | integer    | null: false                       |
+| municipality        | string     | null: false                       |
 | street_address      | string     | null: false                       |
 | building_name       | string     |                                   |
 | telephone_number    | string     | null: false                       |
