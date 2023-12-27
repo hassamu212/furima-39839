@@ -6,12 +6,14 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :delivery_day
 
-  #空の投稿を保存できないようにする
-  validates :title, :text, presence: true
+  
+  validates :item_title, presence: true
+  validates :item_concept, presence: true
+  validates :price, presence: true
   #ジャンルの選択が「---」の時は保存できないようにする
-  validates :category_id, numericality: { other_than: 1, message: "can't be blank"}
-  validates :status_id, numericality: { other_than: 1, message: "can't be blank"}
-  validates :delivery_charge_id, numericality: { other_than: 1, message: "can't be blank"}
-  validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank"}
-  validates :delivery_day_id, numericality: { other_than: 1, message: "can't be blank"}
+  validates :category_id, presence: true, numericality: { other_than: 1, message: "can't be blank"}
+  validates :status_id, presence: true, numericality: { other_than: 1, message: "can't be blank"}
+  validates :delivery_charge_id, presence: true,numericality: { other_than: 1, message: "can't be blank"}
+  validates :prefecture_id, presence: true, numericality: { other_than: 1, message: "can't be blank"}
+  validates :delivery_day_id, presence: true, numericality: { other_than: 1, message: "can't be blank"}
 end
