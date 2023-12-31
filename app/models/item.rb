@@ -11,10 +11,9 @@ class Item < ApplicationRecord
   validates :item_title, presence: true
   validates :item_concept, presence: true
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
-  #ジャンルの選択が「---」の時は保存できないようにする
   validates :category_id, presence: true, numericality: { other_than: 1, message: "can't be blank"}
   validates :status_id, presence: true, numericality: { other_than: 1, message: "can't be blank"}
-  validates :delivery_charge_id, presence: true,numericality: { other_than: 1, message: "can't be blank"}
+  validates :delivery_charge_id, presence: true, numericality: { other_than: 1, message: "can't be blank"}
   validates :prefecture_id, presence: true, numericality: { other_than: 1, message: "can't be blank"}
   validates :delivery_day_id, presence: true, numericality: { other_than: 1, message: "can't be blank"}
 end
