@@ -7,8 +7,8 @@ window.addEventListener('turbo:load', () => {
     priceInput.addEventListener("input", () => {
       const inputValue = document.getElementById("item-price").value;
         let tax = Math.floor(inputValue * 0.1)
-        addTaxDom.innerHTML = tax ;
-        profitDom.innerHTML = Math.ceil(inputValue * 0.9)
+        addTaxDom.innerHTML = tax
+        profitDom.innerHTML = Math.floor(inputValue * 0.9)
     })
   }
 });
