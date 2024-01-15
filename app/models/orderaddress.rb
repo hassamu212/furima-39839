@@ -11,9 +11,9 @@ class Orderaddress
   validates :telephone_number, presence: true, length: { minimum: 10, maximum: 11 }, numericality: { only_integer: true }, allow_nil: true
 
   def save
-    order = Order.create(user_id: user_id, item_id: item_id)
+    order = Order.create(user_id: current_user.id, item_id: item_id)
     Deliveryaddress.create(address: address, prefecture_id: prefecture_id, municipalities: municipalities, 
       street_address: street_address, building_name: building_name, telephone_number: telephone_number, 
-      building_name: building_name, order_id: order.id)
+      order_id: order.id)
   end
 end
