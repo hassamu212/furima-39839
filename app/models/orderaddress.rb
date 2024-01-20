@@ -1,6 +1,6 @@
 class Orderaddress
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :address, :prefecture_id, :municipalities, :street_address, :building_name, :telephone_number
+  attr_accessor :user_id, :item_id, :address, :prefecture_id, :municipalities, :street_address, :building_name, :telephone_number, :token
   
   validates :user_id, presence: true
   validates :item_id, presence: true
@@ -9,6 +9,7 @@ class Orderaddress
   validates :municipalities, presence: true
   validates :street_address, presence: true        
   validates :telephone_number, presence: true, length: { minimum: 10, maximum: 11 }, numericality: { only_integer: true }, allow_nil: true
+  validates :token, presence: true
 
   def save
     order = Order.create(user_id: user_id, item_id: item_id)

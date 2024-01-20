@@ -6,32 +6,32 @@
       購入内容の確認
     </h1>
     <%# 購入内容の表示 %>
-    <% @items.each do |t| %>
-      <div class='buy-item-info'>
-        <%= image_tag t.image, class: 'buy-item-img' %>
-        <div class='buy-item-right-content'>
-          <h2 class='buy-item-text'>
-            <%= t.item_title %>
-          </h2>
-          <div class='buy-item-price'>
-            <p class='item-price-text'>¥<%= t.price %></p>
-            <p class='item-price-sub-text'><%= Deliverycharge.find(t.delivery_charge_id).name %></p>
-          </div>
+    <div class='buy-item-info'>
+      <%= image_tag @item.image, class: 'buy-item-img' %>
+      <div class='buy-item-right-content'>
+        <h2 class='buy-item-text'>
+          <%= @item.item_title %>
+        </h2>
+        <div class='buy-item-price'>
+          <p class='item-price-text'>¥<%= @item.price %></p>
+          <p class='item-price-sub-text'><%= Deliverycharge.find(@item.delivery_charge_id).name %></p>
         </div>
       </div>
-    <%# /購入内容の表示 %>
+    </div>
+  <%# /購入内容の表示 %>
 
-    <%# 支払額の表示 %>
-      <div class='item-payment'>
-        <h1 class='item-payment-title'>
-          支払金額
-        </h1>
-        <p class='item-payment-price'>
-          ¥<%= t.price %>
-        </p>
-      </div>
-    <% end %>
+  <%# 支払額の表示 %>
+    <div class='item-payment'>
+      <h1 class='item-payment-title'>
+        支払金額
+      </h1>
+      <p class='item-payment-price'>
+        ¥<%= @item.price %>
+      </p>
+    </div>
     <%# /支払額の表示 %>
+
+    <%= include_gon %>
 
     <%= form_with model: @orderaddress, url: item_orders_path, id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
 
