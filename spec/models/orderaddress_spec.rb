@@ -1,12 +1,18 @@
 require 'rails_helper'
 RSpec.describe Orderaddress, type: :model do
   before do
-  @orderaddress = FactoryBot.build(:orderaddress)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item)
+    @orderaddress = FactoryBot.build(:orderaddress, user_id: user.id, item_id: item.id)
   end
 
   describe '購入機能' do
     context '購入できる場合' do
       it "購入できる" do
+        expect(@orderaddress).to be_valid
+      end
+      it "建物名がなくても購入できる" do
+        @orderaddress.building_name = nil
         expect(@orderaddress).to be_valid
       end
     end
@@ -56,10 +62,15 @@ RSpec.describe Orderaddress, type: :model do
         @orderaddress.valid?
         expect(@orderaddress.errors.full_messages).to include "Telephone number can't be blank"
       end
-      it 'telephone_numberが11文字以上では登録できない' do
+      it 'telephone_numberが12文字以上では登録できない' do
         @orderaddress.telephone_number = "000000000000"
         @orderaddress.valid?
         expect(@orderaddress.errors.full_messages).to include"Telephone number is too long (maximum is 11 characters)"
+      end
+      it 'telephone_numberが9文字以下では登録できない' do
+        @orderaddress.telephone_number = "000000000"
+        @orderaddress.valid?
+        expect(@orderaddress.errors.full_messages).to include"Telephone number is too short (minimum is 10 characters)"
       end
       it 'telephone_numberが数字以外では登録できない' do
         @orderaddress.telephone_number = "000-000-000"
