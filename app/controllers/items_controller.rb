@@ -46,7 +46,9 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    unless @item && current_user.id == @item.user_id
+    if !(@item && current_user.id == @item.user_id)
+      redirect_to action: :index
+    elsif @item.sold_out?
       redirect_to action: :index
     end
   end
