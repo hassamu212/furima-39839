@@ -7,5 +7,6 @@ FactoryBot.define do
     municipalities { "世田谷区" }
     street_address { "世田谷0-0-0" }      
     telephone_number { "0000000000" }
+    token {"test"}
   end
 end

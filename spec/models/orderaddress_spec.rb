@@ -11,6 +11,11 @@ RSpec.describe Orderaddress, type: :model do
       end
     end
     context '購入できない場合' do
+      it "tokenが空では登録できないこと" do
+        @orderaddress.token = nil
+        @orderaddress.valid?
+        expect(@orderaddress.errors.full_messages).to include "Token can't be blank"
+      end
       it 'user_idが空では登録できない' do
         @orderaddress.user_id = nil
         @orderaddress.valid?
