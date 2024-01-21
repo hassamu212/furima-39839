@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :move_to_index, expect: [:index]
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -35,6 +36,15 @@ class OrdersController < ApplicationController
       card: order_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def move_to_index
+    @item = Item.find(params[:item_id])
+    if @item && current_user.id == @item.user_id
+      redirect_to root_path
+    elsif @item.sold_out?
+      redirect_to root_path
+    end
   end
 
 end

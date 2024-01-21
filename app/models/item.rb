@@ -1,8 +1,4 @@
 class Item < ApplicationRecord
-
-  def sold_out?
-    self.order.present?
-  end
   
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
@@ -24,5 +20,11 @@ class Item < ApplicationRecord
   validates :delivery_charge_id, presence: true, numericality: { other_than: 1, message: "can't be blank"}
   validates :prefecture_id, presence: true, numericality: { other_than: 1, message: "can't be blank"}
   validates :delivery_day_id, presence: true, numericality: { other_than: 1, message: "can't be blank"}
+  
+  
+  def sold_out?
+    self.order.present?
+  end
+
 
 end
