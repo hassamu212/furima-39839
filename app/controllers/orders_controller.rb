@@ -1,23 +1,21 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :item_find
   before_action :move_to_index, expect: [:index]
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-    item_find
     @orderaddress = Orderaddress.new
   end
 
   def create
     @orderaddress = Orderaddress.new(order_params)
-    item_find
     if @orderaddress.valid?
       pay_item
       @orderaddress.save
       redirect_to root_path
     else
       gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-      item_find
       render :index , status: :unprocessable_entity
     end
   end
@@ -25,8 +23,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    item_id = params[:item_id]
-    params.require(:orderaddress).permit(:address, :prefecture_id, :municipalities, :street_address, :building_name, :telephone_number).merge(user_id: current_user.id, item_id: item_id, token: params[:token])
+    params.require(:orderaddress).permit(:address, :prefecture_id, :municipalities, :street_address, :building_name, :telephone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
   def item_find
@@ -43,7 +40,6 @@ class OrdersController < ApplicationController
   end
 
   def move_to_index
-    @item = Item.find(params[:item_id])
     if @item && current_user.id == @item.user_id
       redirect_to root_path
     elsif @item.sold_out?
