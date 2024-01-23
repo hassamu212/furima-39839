@@ -12,4 +12,5 @@ class User < ApplicationRecord
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?[0-9])/i }
 
   has_many :items
+  has_many :orders
 end
