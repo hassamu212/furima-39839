@@ -9,7 +9,7 @@ class Orderaddress
     validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank"}
     validates :municipalities
     validates :street_address
-    validates :telephone_number, length: { minimum: 10, maximum: 11 }, numericality: { only_integer: true }, allow_nil: true
+    validates :telephone_number, format: { with: /\A\d{10,11}\z/ }, allow_nil: true
     validates :token
   end
 
