@@ -146,7 +146,7 @@
                   <%= t.item_title %>
                 </h3>
                 <div class='item-price'>
-                  <span><%= t.price %>円<br><%= Deliveryday.find(t.delivery_day_id).name %></span>
+                  <span><%= t.price %>円<br><%= Deliverycharge.find(t.delivery_charge_id).name %></span>
                   <div class='star-btn'>
                     <%= image_tag "star.png", class:"star-icon" %>
                     <span class='star-count'>0</span>
